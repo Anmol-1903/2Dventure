@@ -37,9 +37,7 @@ public class PlayerController : MonoBehaviour
         playerControl.Player.Shoot.performed -= OnShootPerformed;
     }
     private void FixedUpdate()
-    {
-        Debug.Log(IsGrounded());
-        if (_canClimb)
+    {        if (_canClimb)
         {
             rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime / 2, moveAxisY * _moveSpeed * Time.fixedDeltaTime / 2);
         }
