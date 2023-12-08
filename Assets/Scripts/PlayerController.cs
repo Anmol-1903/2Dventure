@@ -7,13 +7,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool _canClimb = false;
     [SerializeField] GameObject _bulletPrefab;
 
+    private PlayerAnimations _anims;
+    
     private PlayerControl playerControl = null;
+    private Rigidbody2D rb = null;
     private float moveAxisX = 0f;
     private float moveAxisY = 0f;
-    private Rigidbody2D rb = null;
+    private bool isRunning;
+    private bool isFlipped;
+    private bool doubleJump;
     private void Awake()
     {
         playerControl = new PlayerControl();
+        _anims = GetComponentInChildren<PlayerAnimations>();
         rb = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()
@@ -37,7 +43,9 @@ public class PlayerController : MonoBehaviour
         playerControl.Player.Shoot.performed -= OnShootPerformed;
     }
     private void FixedUpdate()
-    {        if (_canClimb)
+    {
+        Debug.DrawRay(transform.position, Vector2.down * (transform.GetChild(0).localScale.y - 0.385f), Color.red);
+        if (_canClimb)
         {
             rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime / 2, moveAxisY * _moveSpeed * Time.fixedDeltaTime / 2);
         }
@@ -45,26 +53,55 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
         }
+        if (isFlipped)
+        {
+            transform.localScale = new Vector2(-1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
     }
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
         moveAxisX = value.ReadValue<float>();
+        if (moveAxisX < 0)
+        {
+            isFlipped = true;
+        }
+        else if (moveAxisX > 0)
+        {
+            isFlipped = false;
+        }
+        isRunning = true;
+        _anims.Run(true);
     }
     private void OnMovementCanceled(InputAction.CallbackContext value)
     {
         moveAxisX = 0f;
+        isRunning = false;
+        _anims.Run(false);
     }
     private void OnJumpPerformed(InputAction.CallbackContext value)
     {
-        if (IsGrounded() && !_canClimb)
+        if (IsGrounded() && !_canClimb && !doubleJump)
         {
             rb.AddForce(Vector2.up * _jumpPower);
+            doubleJump = true;
+            _anims.Jump();
+        }
+        else if (!IsGrounded() && !_canClimb && doubleJump)
+        {
+            rb.AddForce(Vector2.up * _jumpPower);
+            doubleJump = false;
+            _anims.DoubleJump();
         }
     }
     private bool IsGrounded()
     {
-        if (Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y / 2 + 0.1f, 1 << 3))
+        if (Physics2D.Raycast(transform.position, Vector2.down, transform.GetChild(0).localScale.y - 0.385f, 1 << 3))
         {
+            doubleJump = false;
             return true;
         }
         return false;
@@ -79,7 +116,38 @@ public class PlayerController : MonoBehaviour
     }
     private void OnShootPerformed(InputAction.CallbackContext value)
     {
-        Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        if (!IsGrounded())
+        {
+            return;
+        }
+
+
+        if (isRunning)
+        {
+            _anims.AttackRunning();
+        }
+        else
+        {
+            _anims.AttackIdle();
+        }
+    }
+    public void SpawnProjectile()
+    {
+        GameObject bullet = BulletPool.Instance.GetBullet();
+        bullet.transform.parent = FindAnyObjectByType<BulletPool>().transform;
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = Quaternion.identity;
+        bullet.SetActive(true);
+
+        if (isFlipped)
+        {
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.left * _moveSpeed / 25;
+        }
+        else
+        {
+            bullet.GetComponent<Rigidbody2D>().velocity = -Vector2.left * _moveSpeed / 25;
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -95,6 +163,13 @@ public class PlayerController : MonoBehaviour
         {
             _canClimb = false;
             rb.gravityScale = 1;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.layer == 3)
+        {
+            _anims.LandJump();
         }
     }
 }
