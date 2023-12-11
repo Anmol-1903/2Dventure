@@ -34,7 +34,14 @@ public class PlayerAnimations : MonoBehaviour
     }
     public void ShootProjectile()
     {
-        Debug.Log("Event Called");
         GetComponentInParent<PlayerController>().SpawnProjectile();
+    }
+    public void OnLadder(bool _bool)
+    {
+        animator.SetBool("OnLadder", _bool);
+    }
+    public void ClimbDirection(float _dir)
+    {
+        animator.SetFloat("ClimbDirection", _dir);
     }
 }

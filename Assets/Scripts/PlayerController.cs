@@ -8,9 +8,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _bulletPrefab;
 
     private PlayerAnimations _anims;
-    
+
     private PlayerControl playerControl = null;
     private Rigidbody2D rb = null;
+    private new BoxCollider2D collider2D;
     private float moveAxisX = 0f;
     private float moveAxisY = 0f;
     private bool isRunning;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         playerControl = new PlayerControl();
         _anims = GetComponentInChildren<PlayerAnimations>();
+        collider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()
@@ -44,7 +46,6 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.DrawRay(transform.position, Vector2.down * (transform.GetChild(0).localScale.y - 0.385f), Color.red);
         if (_canClimb)
         {
             rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime / 2, moveAxisY * _moveSpeed * Time.fixedDeltaTime / 2);
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
     }
     private bool IsGrounded()
     {
-        if (Physics2D.Raycast(transform.position, Vector2.down, transform.GetChild(0).localScale.y - 0.385f, 1 << 3))
+        if (collider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             doubleJump = false;
             return true;
@@ -109,10 +110,12 @@ public class PlayerController : MonoBehaviour
     private void OnClimbPerformed(InputAction.CallbackContext value)
     {
         moveAxisY = value.ReadValue<float>();
+        _anims.ClimbDirection(moveAxisY);
     }
     private void OnClimbCanceled(InputAction.CallbackContext value)
     {
         moveAxisY = 0;
+        _anims.ClimbDirection(moveAxisY);
     }
     private void OnShootPerformed(InputAction.CallbackContext value)
     {
@@ -154,6 +157,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Ladder"))
         {
             _canClimb = true;
+            _anims.OnLadder(true);
             rb.gravityScale = 0;
         }
     }
@@ -162,12 +166,13 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Ladder"))
         {
             _canClimb = false;
+            _anims.OnLadder(false);
             rb.gravityScale = 1;
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.layer == 3)
+        if (other.gameObject.layer == 3)
         {
             _anims.LandJump();
         }
