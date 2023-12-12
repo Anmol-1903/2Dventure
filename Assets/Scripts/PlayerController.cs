@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _jumpPower = 500f;
     [SerializeField] bool _canClimb = false;
     [SerializeField] GameObject _bulletPrefab;
+    [SerializeField] Transform _bulletSpawnLocation;
 
     private PlayerAnimations _anims;
 
@@ -138,8 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = BulletPool.Instance.GetBullet();
         bullet.transform.parent = FindAnyObjectByType<BulletPool>().transform;
-        bullet.transform.position = transform.position;
-        bullet.transform.rotation = Quaternion.identity;
+        bullet.transform.SetPositionAndRotation(_bulletSpawnLocation.position, Quaternion.identity);
         bullet.SetActive(true);
 
         if (isFlipped)

@@ -220,12 +220,14 @@ namespace Pathfinding {
 						   "&branch="+AstarPath.Branch;
 
 #if UNITY_2018_1_OR_NEWER
-			updateCheckDownload = UnityWebRequest.Get(query);
+			updateCheckDownload = UnityWebRequest.Get("https://" + query);
 			updateCheckDownload.SendWebRequest();
+
+
 #else
-			updateCheckDownload = new WWW(query);
+			updateCheckDownload = new WWW("https://" + query);
 #endif
-			lastUpdateCheck = System.DateTime.UtcNow;
+            lastUpdateCheck = System.DateTime.UtcNow;
 		}
 
 		/// <summary>Handles the data from the update page</summary>
