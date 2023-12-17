@@ -15,14 +15,14 @@ GameObject:
   - component: {fileID: 5540032664627666564}
   - component: {fileID: 6780379023087295600}
   - component: {fileID: 8371619831669670558}
-  - component: {fileID: 5673524142491594462}
+  - component: {fileID: 1415149432847174036}
   m_Layer: 8
   m_Name: SpikeDude
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2085339271176134127
 Transform:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 6030525229073771965}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3ea47f507e81a5f4e9b25fed5cb622c2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6d0ebcaa6aa6ed346802ea155daa9409, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &5673524142491594462
+--- !u!114 &1415149432847174036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,19 +255,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6030525229073771965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4e04f688ba2dd4db11f38d1802827b, type: 3}
+  m_Script: {fileID: 11500000, guid: ad23edd30281fe246b9d3b870a537183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   A: {fileID: 0}
   B: {fileID: 0}
-  activateDistance: 10
   pathUpdatePerSeconds: 0.1
-  speed: 175
+  speed: 150
   nextWaypointDistance: 0.5
   jumpNodeHeightRequirement: 0.5
   jumpModifier: 10
-  followEnabled: 1
-  followPlayer: 0
   jumpEnabled: 0
   inverted: 0

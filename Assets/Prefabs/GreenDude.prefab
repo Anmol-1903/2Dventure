@@ -271,4 +271,3 @@ MonoBehaviour:
   followPlayer: 0
   jumpEnabled: 0
   inverted: 0
-  waypoint: {fileID: 0}
