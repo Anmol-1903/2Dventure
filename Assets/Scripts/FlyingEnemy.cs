@@ -15,6 +15,7 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField] float nextWaypointDistance;
 
     [Header("Customs")]
+    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] float viewAngle = 45f;
     [SerializeField] float rayCount = 5f;
     [SerializeField] bool followEnabled;
@@ -26,11 +27,13 @@ public class FlyingEnemy : MonoBehaviour
     Transform currentPatrolPoint;
     Rigidbody2D rb;
     int currentWaypoint;
+    int currentHealth;
 
     Vector2 dir;
 
     private void Start()
     {
+        currentHealth = MAXHEALTH;
         currentPatrolPoint = patrolPointA;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -187,6 +190,21 @@ public class FlyingEnemy : MonoBehaviour
                     followPlayer = true;
                     break;
                 }
+            }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+        }
+        if(other.gameObject.layer == 9)
+        {
+            currentHealth--;
+            if(currentHealth <= 0) 
+            {
+                gameObject.SetActive(false);
             }
         }
     }

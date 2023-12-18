@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool _canClimb = false;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _bulletSpawnLocation;
+    [SerializeField] GameObject _fireFX;
 
+    private ParticleSystem[] _particles;
     private PlayerAnimations _anims;
 
     private PlayerControl playerControl = null;
+    private Health playerHealth = null;
     private Rigidbody2D rb = null;
     private new BoxCollider2D collider2D;
     private float moveAxisX = 0f;
@@ -20,10 +23,13 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private void Awake()
     {
-        playerControl = new PlayerControl();
-        _anims = GetComponentInChildren<PlayerAnimations>();
-        collider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        playerControl = new PlayerControl();
+        playerHealth = GetComponent<Health>();
+        collider2D = GetComponent<BoxCollider2D>();
+        _anims = GetComponentInChildren<PlayerAnimations>();
+        _particles = _fireFX.GetComponentsInChildren<ParticleSystem>();
+        PlayFireFX(false);
     }
     private void OnEnable()
     {
@@ -44,6 +50,10 @@ public class PlayerController : MonoBehaviour
         playerControl.Player.Climb.performed -= OnClimbPerformed;
         playerControl.Player.Climb.canceled -= OnClimbCanceled;
         playerControl.Player.Shoot.performed -= OnShootPerformed;
+    }
+    public void PlayerDeath()
+    {
+        GetComponent<PlayerController>().enabled = false;
     }
     private void FixedUpdate()
     {
@@ -175,6 +185,24 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             _anims.LandJump();
+        }
+        else if(other.gameObject.layer == 10 || other.gameObject.layer == 8)
+        {
+            playerHealth.TakeDamage();
+        }
+    }
+    public void PlayFireFX(bool _bool)
+    {
+        for (int i = 0; i < _particles.Length; i++)
+        {
+            if (_bool)
+            {
+                _particles[i].Play();
+            }
+            else
+            {
+                _particles[i].Stop();
+            }
         }
     }
 }

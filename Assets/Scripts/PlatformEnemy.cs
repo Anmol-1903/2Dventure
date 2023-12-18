@@ -12,6 +12,7 @@ public class PlatformEnemy : MonoBehaviour
     [SerializeField] float nextWaypointDistance;
 
     [Header("Customs")]
+    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] bool inverted;
     [SerializeField] bool isDead;
 
@@ -21,11 +22,13 @@ public class PlatformEnemy : MonoBehaviour
     Transform waypoint;
     Rigidbody2D rb;
     int currentWaypoint;
+    int currentHealth;
 
     Vector2 dir;
 
     private void Start()
     {
+        currentHealth = MAXHEALTH;
         waypoint = A;
         seeker = GetComponent<Seeker>();
         anim = GetComponent<Animator>();
@@ -96,6 +99,17 @@ public class PlatformEnemy : MonoBehaviour
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));
             inverted = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == 9)
+        {
+            currentHealth--;
+            if (currentHealth <= 0)
+            {
+                anim.SetTrigger("Dead");
+            }
         }
     }
     void TargetInDistance()

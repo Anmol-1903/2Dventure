@@ -2,9 +2,16 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
     Animator animator;
+    PlayerController playerController;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        playerController = GetComponentInParent<PlayerController>();
+    }
+    public void Dead()
+    {
+        animator.SetTrigger("Dead");
+        playerController.PlayerDeath();
     }
     public void Run(bool _bool)
     {
@@ -34,7 +41,8 @@ public class PlayerAnimations : MonoBehaviour
     }
     public void ShootProjectile()
     {
-        GetComponentInParent<PlayerController>().SpawnProjectile();
+        playerController.SpawnProjectile();
+        playerController.PlayFireFX(true);
     }
     public void OnLadder(bool _bool)
     {
@@ -43,5 +51,9 @@ public class PlayerAnimations : MonoBehaviour
     public void ClimbDirection(float _dir)
     {
         animator.SetFloat("ClimbDirection", _dir);
+    }
+    public void ParticleSystemStop()
+    {
+        playerController.PlayFireFX(false);
     }
 }

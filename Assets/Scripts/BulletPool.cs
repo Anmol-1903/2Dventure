@@ -60,7 +60,7 @@ public class BulletPool : MonoBehaviour
             }
         }
         // If all bullets are in use, create a new one
-        GameObject newBullet = Instantiate(bulletPrefab);
+        GameObject newBullet = Instantiate(enemyBulletPrefab);
         enemyBulletPool.Add(newBullet);
         return newBullet;
     }

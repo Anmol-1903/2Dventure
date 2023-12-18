@@ -4,17 +4,20 @@ public class PinkEnemy : MonoBehaviour
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _bulletSpawnLocation;
     [SerializeField] float _turnInterval;
+    [SerializeField] int MAXHEALTH;
     [SerializeField] bool inverted;
     [SerializeField] bool eyesOpen;
 
     Animator animator;
     float i;
+    int currentHealth;
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
     private void Start()
     {
+        currentHealth = MAXHEALTH;
         i = _turnInterval;
         eyesOpen = true;
     }
@@ -64,6 +67,21 @@ public class PinkEnemy : MonoBehaviour
     public void OpenEyes()
     {
         eyesOpen = true;
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+        }
+        if (other.gameObject.layer == 9)
+        {
+            currentHealth--;
+            if (currentHealth <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
     public void ShootProjectile()
     {

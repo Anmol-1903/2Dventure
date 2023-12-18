@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserEnemy : MonoBehaviour
@@ -10,12 +11,14 @@ public class LaserEnemy : MonoBehaviour
     [SerializeField] float waitTime = 5f;
 
     [Header("Laser")]
+    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] float laserCooldown = 2f;
     [SerializeField] float laserLength = 12.5f;
     [SerializeField] Material laserMaterial;
     [SerializeField] GameObject particleEffects;
     [SerializeField] GameObject[] laserEndParticles;
 
+    int currentHealth;
     private Transform waypoints;
     private bool isWaiting = false;
     private bool attacking = false;
@@ -28,9 +31,11 @@ public class LaserEnemy : MonoBehaviour
     private LineRenderer downLineRenderer;
     private LineRenderer leftLineRenderer;
     private LineRenderer rightLineRenderer;
+    private HashSet<LineRenderer> lasersThatHitPlayer = new HashSet<LineRenderer>();
 
     void Start()
     {
+        currentHealth = MAXHEALTH;
         waypoints = waypointA;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -71,6 +76,12 @@ public class LaserEnemy : MonoBehaviour
                     Vector2 normal = hit.normal;
                     float angle = Mathf.Atan2(normal.y, normal.x) * Mathf.Rad2Deg + 180f;
                     laserEndParticles[i].transform.rotation = Quaternion.Euler(0, 0, angle);
+
+                    // If the player is hit and the LineRenderer hasn't hit the player before during this attack
+                    if (hit.collider.CompareTag("Player") && lasersThatHitPlayer.Add(GetLineRendererByDirection(i)))
+                    {
+                        hit.collider.GetComponent<Health>().TakeDamage();
+                    }
                 }
                 else
                 {
@@ -223,6 +234,18 @@ public class LaserEnemy : MonoBehaviour
         DisableLasers();
         animator.SetBool("Attack", false);
         attacking = false;
+        lasersThatHitPlayer.Clear();
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == 9)
+        {
+            currentHealth--;
+            if (currentHealth <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     void NextWaypoint()
