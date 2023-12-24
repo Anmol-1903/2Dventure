@@ -97,9 +97,10 @@ GameObject:
   - component: {fileID: 2021950597802451381}
   - component: {fileID: 1724457653223503018}
   - component: {fileID: 3715027301293919222}
+  - component: {fileID: 6705110919965374079}
   m_Layer: 8
   m_Name: FlyingDude
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -302,8 +303,23 @@ MonoBehaviour:
   pathUpdatePerSeconds: 0.1
   speed: 175
   nextWaypointDistance: 0.5
+  MAXHEALTH: 2
   viewAngle: 45
   rayCount: 9
   followEnabled: 1
   followPlayer: 0
   inverted: 0
+--- !u!114 &6705110919965374079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5200010877389235813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7042c1aec9cd428e5037b98d1ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAXHEALTH: 4
+  StayAfterDeath: 0

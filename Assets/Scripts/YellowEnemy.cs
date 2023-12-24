@@ -25,6 +25,7 @@ public class YellowEnemy : MonoBehaviour
     Seeker seeker;
     Animator anim;
     Rigidbody2D rb;
+    EnemyHealth health;
     new BoxCollider2D collider;
     int currentWaypoint;
     int currentHealth;
@@ -37,6 +38,7 @@ public class YellowEnemy : MonoBehaviour
     private void Start()
     {
         currentHealth = MAXHEALTH;
+        health = GetComponent<EnemyHealth>();
         seeker = GetComponent<Seeker>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -192,11 +194,7 @@ public class YellowEnemy : MonoBehaviour
         }
         if (other.gameObject.layer == 9)
         {
-            currentHealth--;
-            if (currentHealth <= 0)
-            {
-                gameObject.SetActive(false);
-            }
+            health.TakeDamage(2);
         }
     }
     void OnPathComplete(Path p)

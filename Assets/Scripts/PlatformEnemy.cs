@@ -21,6 +21,7 @@ public class PlatformEnemy : MonoBehaviour
     Animator anim;
     Transform waypoint;
     Rigidbody2D rb;
+    EnemyHealth health;
     int currentWaypoint;
     int currentHealth;
 
@@ -30,6 +31,7 @@ public class PlatformEnemy : MonoBehaviour
     {
         currentHealth = MAXHEALTH;
         waypoint = A;
+        health = GetComponent<EnemyHealth>();
         seeker = GetComponent<Seeker>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -39,9 +41,10 @@ public class PlatformEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         TargetInDistance();
-        if (isDead)
+        if (health.GetCuttentHealth() <= 0)
         {
-            anim.SetTrigger("Dead");
+            rb.velocity = Vector2.zero;
+            gameObject.layer = 3;
         }
         else
         {
@@ -105,11 +108,7 @@ public class PlatformEnemy : MonoBehaviour
     {
         if (other.gameObject.layer == 9)
         {
-            currentHealth--;
-            if (currentHealth <= 0)
-            {
-                anim.SetTrigger("Dead");
-            }
+            health.TakeDamage(2);
         }
     }
     void TargetInDistance()

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool isRunning;
     private bool isFlipped;
     private bool doubleJump;
+    private bool canFinish;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         playerControl.Player.Climb.canceled += OnClimbCanceled;
         playerControl.Player.Shoot.performed += OnShootPerformed;
     }
+
     private void OnDisable()
     {
         playerControl.Disable();
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerDeath()
     {
+        rb.velocity = Vector2.zero;
         GetComponent<PlayerController>().enabled = false;
     }
     private void FixedUpdate()
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector2(1, 1);
         }
     }
+
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
         moveAxisX = value.ReadValue<float>();
@@ -134,8 +138,12 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
-
+        if(canFinish)
+        {
+            Debug.Log(canFinish);
+            //next level
+            return;
+        }
         if (isRunning)
         {
             _anims.AttackRunning();
@@ -170,6 +178,10 @@ public class PlayerController : MonoBehaviour
             _anims.OnLadder(true);
             rb.gravityScale = 0;
         }
+        if (other.CompareTag("Finish"))
+        {
+            canFinish = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -178,6 +190,10 @@ public class PlayerController : MonoBehaviour
             _canClimb = false;
             _anims.OnLadder(false);
             rb.gravityScale = 1;
+        }
+        if (other.CompareTag("Finish"))
+        {
+            canFinish = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D other)

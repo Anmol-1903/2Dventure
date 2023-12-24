@@ -13,6 +13,10 @@ public class PlayerAnimations : MonoBehaviour
         animator.SetTrigger("Dead");
         playerController.PlayerDeath();
     }
+    public void Hurt()
+    {
+        animator.SetTrigger("Hurt");
+    }
     public void Run(bool _bool)
     {
         animator.SetBool("Running", _bool);

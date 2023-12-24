@@ -26,6 +26,7 @@ public class GreenDude : MonoBehaviour
     Animator anim;
     Transform waypoint;
     Rigidbody2D rb;
+    EnemyHealth health;
     new BoxCollider2D collider;
     int currentWaypoint;
     bool isGrounded;
@@ -36,6 +37,7 @@ public class GreenDude : MonoBehaviour
     private void Start()
     {
         waypoint = A;
+        health = GetComponent<EnemyHealth>();
         seeker = GetComponent<Seeker>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -255,6 +257,11 @@ public class GreenDude : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.layer == 9)
+        {
+            health.TakeDamage(2);
         }
     }
     void OnPathComplete(Path p)

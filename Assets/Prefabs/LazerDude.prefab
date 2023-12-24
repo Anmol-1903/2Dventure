@@ -43684,9 +43684,10 @@ GameObject:
   - component: {fileID: 8371430191884465997}
   - component: {fileID: 7063821963190741993}
   - component: {fileID: 3917132028055244542}
+  - component: {fileID: 5153175893151285102}
   m_Layer: 8
   m_Name: LazerDude
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43888,6 +43889,7 @@ MonoBehaviour:
   patrolSpeed: 1
   maxSpeed: 0.1
   waitTime: 7
+  MAXHEALTH: 2
   laserCooldown: 5
   laserLength: 12.5
   laserMaterial: {fileID: 2100000, guid: 5ed6a03d5af0e8f4f864cd7e7856c831, type: 2}
@@ -43897,6 +43899,20 @@ MonoBehaviour:
   - {fileID: 7498222175182662534}
   - {fileID: 8267949592652497292}
   - {fileID: 2302913816866095444}
+--- !u!114 &5153175893151285102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118976069913269152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7042c1aec9cd428e5037b98d1ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAXHEALTH: 4
+  StayAfterDeath: 0
 --- !u!1 &7443633160876465031
 GameObject:
   m_ObjectHideFlags: 0

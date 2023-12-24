@@ -9,11 +9,13 @@ public class PinkEnemy : MonoBehaviour
     [SerializeField] bool eyesOpen;
 
     Animator animator;
+    EnemyHealth health;
     float i;
     int currentHealth;
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        health = GetComponent<EnemyHealth>();
     }
     private void Start()
     {
@@ -76,11 +78,7 @@ public class PinkEnemy : MonoBehaviour
         }
         if (other.gameObject.layer == 9)
         {
-            currentHealth--;
-            if (currentHealth <= 0)
-            {
-                gameObject.SetActive(false);
-            }
+            health.TakeDamage(2);
         }
     }
     public void ShootProjectile()

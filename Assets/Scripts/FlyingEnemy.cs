@@ -26,6 +26,7 @@ public class FlyingEnemy : MonoBehaviour
     Seeker seeker;
     Transform currentPatrolPoint;
     Rigidbody2D rb;
+    EnemyHealth health;
     int currentWaypoint;
     int currentHealth;
 
@@ -35,6 +36,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         currentHealth = MAXHEALTH;
         currentPatrolPoint = patrolPointA;
+        health = GetComponent<EnemyHealth>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         target = FindObjectOfType<PlayerController>().transform;
@@ -201,11 +203,7 @@ public class FlyingEnemy : MonoBehaviour
         }
         if(other.gameObject.layer == 9)
         {
-            currentHealth--;
-            if(currentHealth <= 0) 
-            {
-                gameObject.SetActive(false);
-            }
+            health.TakeDamage(2);
         }
     }
 

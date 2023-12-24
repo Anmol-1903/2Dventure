@@ -98,9 +98,10 @@ GameObject:
   - component: {fileID: 1554913845511963144}
   - component: {fileID: 6130963490370573808}
   - component: {fileID: 1874213003698964481}
+  - component: {fileID: 7210280208773867832}
   m_Layer: 8
   m_Name: BlueDude
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,3 +355,17 @@ MonoBehaviour:
   followPlayer: 0
   jumpEnabled: 0
   inverted: 0
+--- !u!114 &7210280208773867832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859652123895404367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7042c1aec9cd428e5037b98d1ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAXHEALTH: 4
+  StayAfterDeath: 0

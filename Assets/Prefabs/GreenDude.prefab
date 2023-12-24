@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 1058812142402212130}
   - component: {fileID: 575348914695708047}
   - component: {fileID: 6827222742930539021}
+  - component: {fileID: 1295688888693620582}
   m_Layer: 8
   m_Name: GreenDude
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,6 +273,20 @@ MonoBehaviour:
   followPlayer: 0
   jumpEnabled: 0
   inverted: 0
+--- !u!114 &1295688888693620582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552355952390805213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7042c1aec9cd428e5037b98d1ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAXHEALTH: 4
+  StayAfterDeath: 0
 --- !u!1 &7323586756413047983
 GameObject:
   m_ObjectHideFlags: 0

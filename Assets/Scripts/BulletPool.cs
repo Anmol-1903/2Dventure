@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 public class BulletPool : MonoBehaviour
 {
     public static BulletPool Instance;
@@ -24,6 +24,7 @@ public class BulletPool : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.SetActive(false);
             bulletPool.Add(bullet);
+            bullet.transform.parent = transform;
         }
     }
     private void InitializeEnemyPool()
@@ -34,6 +35,7 @@ public class BulletPool : MonoBehaviour
             GameObject bullet = Instantiate(enemyBulletPrefab);
             bullet.SetActive(false);
             enemyBulletPool.Add(bullet);
+            bullet.transform.parent = transform;
         }
     }
     public GameObject GetBullet()

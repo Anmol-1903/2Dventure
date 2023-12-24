@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 6888083734858018548}
   - component: {fileID: 2696587315691641017}
   - component: {fileID: 8374299575187649647}
-  m_Layer: 0
+  - component: {fileID: 7385735015989468748}
+  m_Layer: 11
   m_Name: SmallPlatform
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,8 +229,23 @@ MonoBehaviour:
   pathUpdatePerSeconds: 0.1
   speed: 150
   nextWaypointDistance: 0.1
+  MAXHEALTH: 2
   inverted: 0
   isDead: 0
+--- !u!114 &7385735015989468748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779614538417181927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7042c1aec9cd428e5037b98d1ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAXHEALTH: 4
+  StayAfterDeath: 1
 --- !u!1 &2880306137961410325
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8228128776467385380}
   - component: {fileID: 8584785029212022793}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

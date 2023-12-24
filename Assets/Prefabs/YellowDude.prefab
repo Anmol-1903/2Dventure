@@ -47,9 +47,10 @@ GameObject:
   - component: {fileID: 693097639045222065}
   - component: {fileID: 6162447570724058308}
   - component: {fileID: 7512777756605872850}
+  - component: {fileID: 2319024426576833276}
   m_Layer: 8
   m_Name: YellowDude
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,12 +299,27 @@ MonoBehaviour:
   nextWaypointDistance: 0.5
   jumpNodeHeightRequirement: 0.5
   jumpModifier: 10
+  MAXHEALTH: 2
   _bulletSpawnLocation: {fileID: 6416749721275891744}
   followPlayer: 0
   jumpEnabled: 0
   inverted: 0
   turnInterval: 7.5
   counter: 0
+--- !u!114 &2319024426576833276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123296506074973986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7042c1aec9cd428e5037b98d1ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAXHEALTH: 4
+  StayAfterDeath: 0
 --- !u!1 &8407940525781731349
 GameObject:
   m_ObjectHideFlags: 0

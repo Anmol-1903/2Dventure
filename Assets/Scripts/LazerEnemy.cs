@@ -23,6 +23,7 @@ public class LaserEnemy : MonoBehaviour
     private bool isWaiting = false;
     private bool attacking = false;
     private Animator animator;
+    EnemyHealth health;
     private Rigidbody2D rb;
 
     private ParticleSystem[] allParticals;
@@ -39,6 +40,7 @@ public class LaserEnemy : MonoBehaviour
         waypoints = waypointA;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        health = GetComponent<EnemyHealth>();
         allParticals = particleEffects.GetComponentsInChildren<ParticleSystem>();
         InitializeLineRenderers();
         DisableLasers();
@@ -240,11 +242,7 @@ public class LaserEnemy : MonoBehaviour
     {
         if (other.gameObject.layer == 9)
         {
-            currentHealth--;
-            if (currentHealth <= 0)
-            {
-                gameObject.SetActive(false);
-            }
+            health.TakeDamage(2);
         }
     }
 

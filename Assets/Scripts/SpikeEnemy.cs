@@ -24,6 +24,7 @@ public class SpikeEnemy : MonoBehaviour
     Animator anim;
     Transform waypoint;
     Rigidbody2D rb;
+    EnemyHealth health;
     new BoxCollider2D collider;
     int currentHealth;
     int currentWaypoint;
@@ -39,6 +40,7 @@ public class SpikeEnemy : MonoBehaviour
         seeker = GetComponent<Seeker>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<EnemyHealth>();
         collider = GetComponent<BoxCollider2D>();
         target = FindObjectOfType<PlayerController>().transform;
 
@@ -160,11 +162,7 @@ public class SpikeEnemy : MonoBehaviour
     {
         if (other.gameObject.layer == 9)
         {
-            currentHealth--;
-            if (currentHealth <= 0)
-            {
-                anim.SetTrigger("Dead");
-            }
+            health.TakeDamage(2);
         }
     }
     void OnPathComplete(Path p)

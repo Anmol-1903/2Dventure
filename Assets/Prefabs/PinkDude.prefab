@@ -128,9 +128,10 @@ GameObject:
   - component: {fileID: 8742484927157496375}
   - component: {fileID: 7803028244899842271}
   - component: {fileID: 7908887837479532294}
+  - component: {fileID: 2843354257757864754}
   m_Layer: 8
   m_Name: PinkDude
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,5 +331,20 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 5179762000216084619, guid: b980618efc50e8049b93f44444d1cb19, type: 3}
   _bulletSpawnLocation: {fileID: 2672161608796210718}
   _turnInterval: 0
+  MAXHEALTH: 0
   inverted: 0
   eyesOpen: 0
+--- !u!114 &2843354257757864754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147919480711535658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7042c1aec9cd428e5037b98d1ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAXHEALTH: 4
+  StayAfterDeath: 0
