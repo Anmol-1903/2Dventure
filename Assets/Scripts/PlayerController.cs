@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _bulletSpawnLocation;
     [SerializeField] GameObject _fireFX;
 
+    GameObject _interactText;
     private ParticleSystem[] _particles;
     private PlayerAnimations _anims;
 
@@ -29,8 +30,10 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponent<Health>();
         collider2D = GetComponent<BoxCollider2D>();
         _anims = GetComponentInChildren<PlayerAnimations>();
+        _interactText = GameObject.FindGameObjectWithTag("Interact");
         _particles = _fireFX.GetComponentsInChildren<ParticleSystem>();
         PlayFireFX(false);
+        _interactText.SetActive(false);
     }
     private void OnEnable()
     {
@@ -180,6 +183,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Finish"))
         {
+            _interactText.SetActive(true);
             canFinish = true;
         }
     }
@@ -193,6 +197,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Finish"))
         {
+            _interactText.SetActive(false);
             canFinish = false;
         }
     }
