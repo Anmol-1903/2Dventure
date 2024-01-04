@@ -57,14 +57,13 @@ public class Health : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        colorAdjustments.colorFilter.value = Color.Lerp(colorAdjustments.colorFilter.value, new Color(1, _currentHealth / (float)MAX_HEALTH, _currentHealth / (float)MAX_HEALTH), Time.deltaTime);
+        colorAdjustments.colorFilter.value = Color.Lerp(colorAdjustments.colorFilter.value, new Color(1, _currentHealth / (float)MAX_HEALTH * 1.5f, _currentHealth / (float)MAX_HEALTH * 1.5f), Time.deltaTime);
         if(_currentHealth <= 0)
             colorAdjustments.saturation.value = Mathf.Lerp(colorAdjustments.saturation.value, -100, Time.deltaTime);
     }
     public void TakeDamage()
     {
         _currentHealth -= 1;
-
 
         for (int i = 0; i < filledHearts.Length; i++)
         {

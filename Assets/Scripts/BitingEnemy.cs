@@ -11,7 +11,14 @@ public class BitingEnemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             animator.SetTrigger("Bite");
-            //Hurt Player
+
+            Vector2 pushDirection = other.transform.position - transform.position;
+            pushDirection.Normalize();
+            
+            if (other.gameObject.TryGetComponent<Rigidbody2D>(out var rb))
+            {
+                rb.AddForce(pushDirection * 10, ForceMode2D.Impulse);
+            }
         }
     }
 }

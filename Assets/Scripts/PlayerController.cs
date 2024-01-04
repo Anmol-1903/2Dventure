@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 10f;
@@ -40,10 +41,15 @@ public class PlayerController : MonoBehaviour
         playerControl.Enable();
         playerControl.Player.Movement.performed += OnMovementPerformed;
         playerControl.Player.Movement.canceled += OnMovementCanceled;
+
         playerControl.Player.Jump.performed += OnJumpPerformed;
+
         playerControl.Player.Climb.performed += OnClimbPerformed;
         playerControl.Player.Climb.canceled += OnClimbCanceled;
+
         playerControl.Player.Shoot.performed += OnShootPerformed;
+
+        playerControl.Player.Interact.performed += OnInteractPerformed;
     }
 
     private void OnDisable()
@@ -51,10 +57,15 @@ public class PlayerController : MonoBehaviour
         playerControl.Disable();
         playerControl.Player.Movement.performed -= OnMovementPerformed;
         playerControl.Player.Movement.canceled -= OnMovementCanceled;
+
         playerControl.Player.Jump.performed -= OnJumpPerformed;
+
         playerControl.Player.Climb.performed -= OnClimbPerformed;
         playerControl.Player.Climb.canceled -= OnClimbCanceled;
+
         playerControl.Player.Shoot.performed -= OnShootPerformed;
+
+        playerControl.Player.Interact.performed -= OnInteractPerformed;
     }
     public void PlayerDeath()
     {
@@ -69,7 +80,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+            if (moveAxisX == 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+            }
         }
         if (isFlipped)
         {
@@ -80,7 +98,17 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector2(1, 1);
         }
     }
-
+    private void OnInteractPerformed(InputAction.CallbackContext value)
+    {
+        if (!IsGrounded())
+        {
+            return;
+        }
+        if (canFinish)
+        {
+            return;
+        }
+    }
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
         moveAxisX = value.ReadValue<float>();
@@ -98,6 +126,7 @@ public class PlayerController : MonoBehaviour
     private void OnMovementCanceled(InputAction.CallbackContext value)
     {
         moveAxisX = 0f;
+        rb.velocity = new Vector2(0, rb.velocity.y);
         isRunning = false;
         _anims.Run(false);
     }
@@ -139,12 +168,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!IsGrounded())
         {
-            return;
-        }
-        if(canFinish)
-        {
-            Debug.Log(canFinish);
-            //next level
             return;
         }
         if (isRunning)

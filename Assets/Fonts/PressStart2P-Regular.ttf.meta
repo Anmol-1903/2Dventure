@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5116c3930f9b37443ace94367984a1b5
+guid: bfe82d9d5ebe5d84bb8c89f49f36e32c
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Rubik Broken Fax
+  - Press Start 2P
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
