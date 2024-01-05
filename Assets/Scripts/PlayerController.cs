@@ -1,6 +1,6 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 10f;
@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         GetComponent<PlayerController>().enabled = false;
+        _anims.ParticleSystemStop();
     }
     private void FixedUpdate()
     {
@@ -100,14 +101,11 @@ public class PlayerController : MonoBehaviour
     }
     private void OnInteractPerformed(InputAction.CallbackContext value)
     {
-        if (!IsGrounded())
+        if (!IsGrounded() || !canFinish)
         {
             return;
         }
-        if (canFinish)
-        {
-            return;
-        }
+        SceneManagerClass.instance.LoadNewScene();
     }
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
@@ -169,6 +167,10 @@ public class PlayerController : MonoBehaviour
         if (!IsGrounded())
         {
             return;
+        }
+        if (SceneManagerClass.instance.IsLoading())
+        {
+            SceneManagerClass.instance.ButtonPressed();
         }
         if (isRunning)
         {
