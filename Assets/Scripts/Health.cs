@@ -59,7 +59,9 @@ public class Health : MonoBehaviour
     {
         colorAdjustments.colorFilter.value = Color.Lerp(colorAdjustments.colorFilter.value, new Color(1f, _currentHealth / (float)MAX_HEALTH, _currentHealth / (float)MAX_HEALTH), Time.deltaTime);
         if(_currentHealth <= 0)
+        {
             colorAdjustments.saturation.value = Mathf.Lerp(colorAdjustments.saturation.value, -100, Time.deltaTime);
+        }
     }
     public void TakeDamage()
     {

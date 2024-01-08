@@ -162,7 +162,7 @@ public class SpikeEnemy : MonoBehaviour
     {
         if (other.gameObject.layer == 9)
         {
-            health.TakeDamage(2);
+            health.TakeDamage(1);
         }
     }
     void OnPathComplete(Path p)

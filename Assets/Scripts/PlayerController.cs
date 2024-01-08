@@ -1,6 +1,7 @@
-using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 10f;
@@ -47,9 +48,12 @@ public class PlayerController : MonoBehaviour
         playerControl.Player.Climb.performed += OnClimbPerformed;
         playerControl.Player.Climb.canceled += OnClimbCanceled;
 
-        playerControl.Player.Shoot.performed += OnShootPerformed;
-
         playerControl.Player.Interact.performed += OnInteractPerformed;
+
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            playerControl.Player.Shoot.performed += OnShootPerformed;
+        }
     }
 
     private void OnDisable()
@@ -63,9 +67,12 @@ public class PlayerController : MonoBehaviour
         playerControl.Player.Climb.performed -= OnClimbPerformed;
         playerControl.Player.Climb.canceled -= OnClimbCanceled;
 
-        playerControl.Player.Shoot.performed -= OnShootPerformed;
-
         playerControl.Player.Interact.performed -= OnInteractPerformed;
+
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            playerControl.Player.Shoot.performed -= OnShootPerformed;
+        }
     }
     public void PlayerDeath()
     {
@@ -205,6 +212,10 @@ public class PlayerController : MonoBehaviour
             _canClimb = true;
             _anims.OnLadder(true);
             rb.gravityScale = 0;
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            playerHealth.TakeDamage();
         }
         if (other.CompareTag("Finish"))
         {
