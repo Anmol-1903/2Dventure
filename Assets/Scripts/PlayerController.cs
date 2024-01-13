@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -112,7 +111,12 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        SceneManagerClass.instance.LoadNewScene();
+        if(PlayerPrefs.GetInt("Level", 0) < SceneManager.GetActiveScene().buildIndex)
+        {
+            PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
+            Debug.Log(PlayerPrefs.GetInt("Level") + " " + SceneManager.GetActiveScene().buildIndex);
+        }
+        SceneManagerClass.instance.LoadNewScene(0);
     }
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
@@ -175,10 +179,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (SceneManagerClass.instance.IsLoading())
-        {
-            SceneManagerClass.instance.ButtonPressed();
-        }
         if (isRunning)
         {
             _anims.AttackRunning();
@@ -213,13 +213,13 @@ public class PlayerController : MonoBehaviour
             _anims.OnLadder(true);
             rb.gravityScale = 0;
         }
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Spike"))
         {
-            playerHealth.TakeDamage();
+            playerHealth.TakeDamage(10);
         }
         if (other.CompareTag("Finish"))
         {
-            _interactText.SetActive(true);
+            _interactText?.SetActive(true);
             canFinish = true;
         }
     }
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Finish"))
         {
-            _interactText.SetActive(false);
+            _interactText?.SetActive(false);
             canFinish = false;
         }
     }
@@ -245,7 +245,11 @@ public class PlayerController : MonoBehaviour
         }
         else if(other.gameObject.layer == 10 || other.gameObject.layer == 8)
         {
-            playerHealth.TakeDamage();
+            if(SceneManager.GetActiveScene().buildIndex < 3)
+            {
+                return;
+            }
+            playerHealth.TakeDamage(1);
         }
     }
     public void PlayFireFX(bool _bool)

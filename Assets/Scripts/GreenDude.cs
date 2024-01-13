@@ -180,7 +180,7 @@ public class GreenDude : MonoBehaviour
             }
 
             //JUMP
-            if (dir.y > jumpNodeHeightRequirement && isGrounded && (shouldJump || jumpEnabled))
+            if ((dir.y > jumpNodeHeightRequirement && isGrounded) || jumpEnabled)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpModifier);
             }

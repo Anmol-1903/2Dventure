@@ -63,9 +63,9 @@ public class Health : MonoBehaviour
             colorAdjustments.saturation.value = Mathf.Lerp(colorAdjustments.saturation.value, -100, Time.deltaTime);
         }
     }
-    public void TakeDamage()
+    public void TakeDamage(int _amt)
     {
-        _currentHealth -= 1;
+        _currentHealth -= _amt;
 
         for (int i = 0; i < filledHearts.Length; i++)
         {

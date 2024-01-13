@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Interact
   - LoadingScreen
+  - Spike
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - EnemyBullet
   - Platform
   - Interactable
-  - 
-  - 
+  - NonWalkable
+  - Loading
   - 
   - 
   - 

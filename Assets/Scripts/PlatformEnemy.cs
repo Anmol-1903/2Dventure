@@ -18,22 +18,18 @@ public class PlatformEnemy : MonoBehaviour
 
     Path path;
     Seeker seeker;
-    Animator anim;
     Transform waypoint;
     Rigidbody2D rb;
     EnemyHealth health;
     int currentWaypoint;
-    int currentHealth;
 
     Vector2 dir;
 
     private void Start()
     {
-        currentHealth = MAXHEALTH;
         waypoint = A;
         health = GetComponent<EnemyHealth>();
         seeker = GetComponent<Seeker>();
-        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePath", 0f, pathUpdatePerSeconds);

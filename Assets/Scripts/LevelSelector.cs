@@ -4,13 +4,33 @@ public class LevelSelector : MonoBehaviour
 {
     [SerializeField] GameObject MainCam;
     [SerializeField] GameObject scrollBar;
-    [SerializeField] float distance;
     [SerializeField] GameObject[] leftButtonsArray, rightButtonsArray;
+    [SerializeField] Button[] levelButtons;
+    [SerializeField] float distance;
     [SerializeField] int orangeStart, greenStart;
+
     float dest;
     int currentScroll = 0;
     float scrollPos = 0;
     float[] pos;
+
+    int progress;
+    private void OnEnable()
+    {
+        levelButtons = GetComponentsInChildren<Button>();
+        progress = PlayerPrefs.GetInt("Level", 0);
+        for(int i = 0; i < levelButtons.Length; i++)
+        {
+            if(i <= progress)
+            {
+                levelButtons[i].interactable = true;
+            }
+            else
+            {
+                levelButtons[i].interactable = false;
+            }
+        }
+    }
     private void Update()
     {
         pos = new float[transform.childCount];
@@ -76,5 +96,9 @@ public class LevelSelector : MonoBehaviour
         if (currentScroll > 0)
             currentScroll--;
         dest = pos[currentScroll];
+    }
+    public void PlayLevel(int _level)
+    {
+        SceneManagerClass.instance.LoadNewScene(_level);
     }
 }

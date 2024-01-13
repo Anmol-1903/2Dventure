@@ -7,16 +7,18 @@ public class SceneManagerClass : MonoBehaviour
 {
     public static SceneManagerClass instance;
 
+    AsyncOperation operation;
+    Animator animator;
     GameObject _loadingScreen;
     Animator[] svg;
     Slider _progressBar;
-    int buildIndex;
-    bool pressedAnyButton;
     float progress;
+
+    int _waitTime = 6;
+    float _counter;
 
 
     [SerializeField] TextMeshProUGUI _loadingText;
-    [SerializeField] float _loadTime = 5f;
 
     private void Awake()
     {
@@ -25,22 +27,16 @@ public class SceneManagerClass : MonoBehaviour
             Debug.LogError("More than 1 SceneManager in the scene");
         }
         instance = this;
-
         _loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen");
-        buildIndex = SceneManager.GetActiveScene().buildIndex;
+        animator = _loadingScreen.GetComponent<Animator>();
         _loadingText = _loadingScreen.GetComponentInChildren<TextMeshProUGUI>();
         svg = _loadingScreen.GetComponentsInChildren<Animator>();
         _progressBar = _loadingScreen.transform.GetComponentInChildren<Slider>();
-        pressedAnyButton = false;
-        for (int i = 0; i < svg.Length; i++)
+        for (int i = 1; i < svg.Length; i++)
         {
             svg[i].gameObject.SetActive(false);
         }
-        _loadingScreen.SetActive(false);
-    }
-    public void ButtonPressed()
-    {
-        pressedAnyButton = true;
+        DontDestroyOnLoad(gameObject);
     }
     public bool IsLoading()
     {
@@ -50,29 +46,28 @@ public class SceneManagerClass : MonoBehaviour
         }
         return false;
     }
-
-    public void LoadNewScene()
+    public void AllowLoading()
     {
-        if (buildIndex == 0)
+        if (operation != null)
         {
-            //From Main menu to ___ level
+            operation.allowSceneActivation = true;
         }
-        else
-        {
-            int temp = Random.Range(0, svg.Length);
-            _loadingScreen.SetActive(true);
-            svg[temp].gameObject.SetActive(true);
-            StartCoroutine(LoadAsync(0));
-        }
+    }
+    public void LoadNewScene(int _level)
+    {
+        int temp = Random.Range(1, svg.Length);
+        _loadingScreen.SetActive(true);
+        svg[temp].gameObject.SetActive(true);
+        _counter = _waitTime;
+        StartCoroutine(LoadAsync(_level));
     }
     IEnumerator LoadAsync(int lvl)
     {
-        float startTime = Time.time;
-        /*yield return new WaitForSeconds(_loadTime);*/
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(lvl);
+        _loadingScreen.SetActive(true);
+        animator?.SetTrigger("StartLoading");
+        yield return new WaitForSeconds(1);
+        operation = SceneManager.LoadSceneAsync(lvl);
         operation.allowSceneActivation = false;
-        // Ensure that the progress bar is not null
         if (_progressBar != null)
         {
             while (!operation.isDone)
@@ -81,10 +76,13 @@ public class SceneManagerClass : MonoBehaviour
                 _progressBar.value = progress;
                 if (operation.progress >= .9f)
                 {
-                    _loadingText.text = "Shoot To Continue ...";
-                    if (pressedAnyButton)
+                    _loadingText.text = "Loading in ("+ ((int)_counter).ToString() +")";
+                    _counter -= Time.deltaTime;
+                    if (_counter <= 0)
                     {
-                        operation.allowSceneActivation = true;
+                        animator?.SetTrigger("NewScene");
+                        yield return new WaitForSeconds(2);
+                        AllowLoading();
                     }
                 }
                 yield return null;

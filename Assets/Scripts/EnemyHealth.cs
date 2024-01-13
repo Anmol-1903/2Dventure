@@ -26,6 +26,10 @@ public class EnemyHealth : MonoBehaviour
         if( StayAfterDeath )
         {
             GetComponent<Animator>().SetTrigger("Dead");
+            if(gameObject.layer == 11)
+            {
+                gameObject.layer = 3;
+            }
         }
         else
         {

@@ -82,7 +82,7 @@ public class LaserEnemy : MonoBehaviour
                     // If the player is hit and the LineRenderer hasn't hit the player before during this attack
                     if (hit.collider.CompareTag("Player") && lasersThatHitPlayer.Add(GetLineRendererByDirection(i)))
                     {
-                        hit.collider.GetComponent<Health>().TakeDamage();
+                        hit.collider.GetComponent<Health>().TakeDamage(1);
                     }
                 }
                 else
