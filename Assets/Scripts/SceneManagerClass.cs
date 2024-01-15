@@ -38,6 +38,10 @@ public class SceneManagerClass : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+    private void OnEnable()
+    {
+        animator?.SetTrigger("InitialLoad");
+    }
     public bool IsLoading()
     {
         if (progress > .9f)
@@ -56,6 +60,7 @@ public class SceneManagerClass : MonoBehaviour
     public void LoadNewScene(int _level)
     {
         int temp = Random.Range(1, svg.Length);
+        animator?.SetTrigger("StartLoadng");
         _loadingScreen.SetActive(true);
         svg[temp].gameObject.SetActive(true);
         _counter = _waitTime;
@@ -63,8 +68,6 @@ public class SceneManagerClass : MonoBehaviour
     }
     IEnumerator LoadAsync(int lvl)
     {
-        _loadingScreen.SetActive(true);
-        animator?.SetTrigger("StartLoading");
         yield return new WaitForSeconds(1);
         operation = SceneManager.LoadSceneAsync(lvl);
         operation.allowSceneActivation = false;
@@ -84,6 +87,10 @@ public class SceneManagerClass : MonoBehaviour
                         yield return new WaitForSeconds(2);
                         AllowLoading();
                     }
+                }
+                else
+                {
+                    _loadingText.text = "Loading...";
                 }
                 yield return null;
             }

@@ -713,8 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ac5142c8eb9724ba13b9b3319a3acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingScreen: {fileID: 0}
-  svg: []
   _loadingText: {fileID: 0}
 --- !u!1 &294706769
 GameObject:
@@ -1549,7 +1547,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 99ce3d80479524244b975cdf11f67333, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -54380,7 +54378,7 @@ RectTransform:
   m_Father: {fileID: 1091118244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
