@@ -72,9 +72,9 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
+    textureCompression: 3
+    compressionQuality: 0
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -139,8 +139,8 @@ TextureImporter:
       name: UI_0
       rect:
         serializedVersion: 2
-        x: 59
-        y: 250
+        x: 0
+        y: 226
         width: 91
         height: 91
       alignment: 0
@@ -160,8 +160,8 @@ TextureImporter:
       name: UI_1
       rect:
         serializedVersion: 2
-        x: 59
-        y: 140
+        x: 0
+        y: 116
         width: 91
         height: 91
       alignment: 0
@@ -181,8 +181,8 @@ TextureImporter:
       name: UI_2
       rect:
         serializedVersion: 2
-        x: 59
-        y: 30
+        x: 0
+        y: 6
         width: 91
         height: 91
       alignment: 0
@@ -202,8 +202,8 @@ TextureImporter:
       name: UI_3
       rect:
         serializedVersion: 2
-        x: 169
-        y: 250
+        x: 110
+        y: 226
         width: 91
         height: 91
       alignment: 0
@@ -223,8 +223,8 @@ TextureImporter:
       name: UI_4
       rect:
         serializedVersion: 2
-        x: 169
-        y: 140
+        x: 110
+        y: 116
         width: 91
         height: 91
       alignment: 0
@@ -244,8 +244,8 @@ TextureImporter:
       name: UI_5
       rect:
         serializedVersion: 2
-        x: 169
-        y: 30
+        x: 110
+        y: 6
         width: 91
         height: 91
       alignment: 0
@@ -265,8 +265,8 @@ TextureImporter:
       name: UI_6
       rect:
         serializedVersion: 2
-        x: 279
-        y: 250
+        x: 220
+        y: 226
         width: 183
         height: 91
       alignment: 0
@@ -286,8 +286,8 @@ TextureImporter:
       name: UI_7
       rect:
         serializedVersion: 2
-        x: 279
-        y: 140
+        x: 220
+        y: 116
         width: 183
         height: 91
       alignment: 0
@@ -307,8 +307,8 @@ TextureImporter:
       name: UI_8
       rect:
         serializedVersion: 2
-        x: 279
-        y: 30
+        x: 220
+        y: 6
         width: 183
         height: 91
       alignment: 0
@@ -328,8 +328,8 @@ TextureImporter:
       name: UI_9
       rect:
         serializedVersion: 2
-        x: 481
-        y: 24
+        x: 422
+        y: 0
         width: 133
         height: 103
       alignment: 0
@@ -349,8 +349,8 @@ TextureImporter:
       name: UI_10
       rect:
         serializedVersion: 2
-        x: 481
-        y: 134
+        x: 422
+        y: 110
         width: 133
         height: 103
       alignment: 0
@@ -370,8 +370,8 @@ TextureImporter:
       name: UI_11
       rect:
         serializedVersion: 2
-        x: 481
-        y: 244
+        x: 422
+        y: 220
         width: 133
         height: 103
       alignment: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -49,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
         playerControl.Player.Interact.performed += OnInteractPerformed;
 
+        playerControl.Player.Pause.performed += OnPausePerformed;
+
         if (SceneManager.GetActiveScene().buildIndex != 1)
         {
             playerControl.Player.Shoot.performed += OnShootPerformed;
@@ -68,10 +71,16 @@ public class PlayerController : MonoBehaviour
 
         playerControl.Player.Interact.performed -= OnInteractPerformed;
 
+        playerControl.Player.Pause.performed -= OnPausePerformed;
+
         if (SceneManager.GetActiveScene().buildIndex != 1)
         {
             playerControl.Player.Shoot.performed -= OnShootPerformed;
         }
+    }
+    private void OnPausePerformed(InputAction.CallbackContext context)
+    {
+        
     }
     public void PlayerDeath()
     {
