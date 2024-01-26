@@ -12,7 +12,6 @@ public class PlatformEnemy : MonoBehaviour
     [SerializeField] float nextWaypointDistance;
 
     [Header("Customs")]
-    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] bool inverted;
     [SerializeField] bool isDead;
 
@@ -36,6 +35,8 @@ public class PlatformEnemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         TargetInDistance();
         if (health.GetCuttentHealth() <= 0)
         {
@@ -109,7 +110,6 @@ public class PlatformEnemy : MonoBehaviour
     }
     void TargetInDistance()
     {
-
         if (inverted)
         {
             transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));

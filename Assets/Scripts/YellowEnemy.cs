@@ -14,7 +14,6 @@ public class YellowEnemy : MonoBehaviour
     [SerializeField] float jumpModifier;
 
     [Header("Customs")]
-    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] Transform _bulletSpawnLocation;
     [SerializeField] bool followPlayer;
     [SerializeField] bool jumpEnabled;
@@ -26,9 +25,8 @@ public class YellowEnemy : MonoBehaviour
     Animator anim;
     Rigidbody2D rb;
     EnemyHealth health;
-    new BoxCollider2D collider;
+    BoxCollider2D collider;
     int currentWaypoint;
-    int currentHealth;
     bool isGrounded;
     bool shouldJump;
     [SerializeField] float counter;
@@ -37,7 +35,6 @@ public class YellowEnemy : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = MAXHEALTH;
         health = GetComponent<EnemyHealth>();
         seeker = GetComponent<Seeker>();
         anim = GetComponent<Animator>();

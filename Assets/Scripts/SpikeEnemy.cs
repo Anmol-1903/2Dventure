@@ -15,18 +15,15 @@ public class SpikeEnemy : MonoBehaviour
     [SerializeField] float jumpModifier;
 
     [Header("Customs")]
-    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] bool jumpEnabled;
     [SerializeField] bool inverted;
 
     Path path;
     Seeker seeker;
-    Animator anim;
     Transform waypoint;
     Rigidbody2D rb;
     EnemyHealth health;
-    new BoxCollider2D collider;
-    int currentHealth;
+    BoxCollider2D collider;
     int currentWaypoint;
     bool isGrounded;
     bool shouldJump;
@@ -35,10 +32,8 @@ public class SpikeEnemy : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = MAXHEALTH;
         waypoint = A;
         seeker = GetComponent<Seeker>();
-        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<EnemyHealth>();
         collider = GetComponent<BoxCollider2D>();
@@ -48,6 +43,8 @@ public class SpikeEnemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         TargetInDistance();
         PathFollow();
     }

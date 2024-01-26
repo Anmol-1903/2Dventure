@@ -4,14 +4,11 @@ public class PinkEnemy : MonoBehaviour
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _bulletSpawnLocation;
     [SerializeField] float _turnInterval;
-    [SerializeField] int MAXHEALTH;
     [SerializeField] bool inverted;
     [SerializeField] bool eyesOpen;
 
     Animator animator;
     EnemyHealth health;
-    float i;
-    int currentHealth;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -19,12 +16,12 @@ public class PinkEnemy : MonoBehaviour
     }
     private void Start()
     {
-        currentHealth = MAXHEALTH;
-        i = _turnInterval;
         eyesOpen = true;
     }
     private void FixedUpdate()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         if (eyesOpen)
         {
             TargetInDistance();
@@ -32,7 +29,6 @@ public class PinkEnemy : MonoBehaviour
     }
     void TargetInDistance()
     {
-
         if (inverted)
         {
             transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), Mathf.Abs(transform.localScale.z));

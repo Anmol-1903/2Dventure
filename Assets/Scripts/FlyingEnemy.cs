@@ -15,7 +15,6 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField] float nextWaypointDistance;
 
     [Header("Customs")]
-    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] float viewAngle = 45f;
     [SerializeField] float rayCount = 5f;
     [SerializeField] bool followEnabled;
@@ -28,13 +27,11 @@ public class FlyingEnemy : MonoBehaviour
     Rigidbody2D rb;
     EnemyHealth health;
     int currentWaypoint;
-    int currentHealth;
 
     Vector2 dir;
 
     private void Start()
     {
-        currentHealth = MAXHEALTH;
         currentPatrolPoint = patrolPointA;
         health = GetComponent<EnemyHealth>();
         seeker = GetComponent<Seeker>();
@@ -48,6 +45,8 @@ public class FlyingEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         TargetInDistance();
         if (followPlayer && followEnabled)
         {

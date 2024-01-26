@@ -11,14 +11,12 @@ public class LaserEnemy : MonoBehaviour
     [SerializeField] float waitTime = 5f;
 
     [Header("Laser")]
-    [SerializeField] int MAXHEALTH = 2;
     [SerializeField] float laserCooldown = 2f;
     [SerializeField] float laserLength = 12.5f;
     [SerializeField] Material laserMaterial;
     [SerializeField] GameObject particleEffects;
     [SerializeField] GameObject[] laserEndParticles;
 
-    int currentHealth;
     private Transform waypoints;
     private bool isWaiting = false;
     private bool attacking = false;
@@ -36,7 +34,6 @@ public class LaserEnemy : MonoBehaviour
 
     void Start()
     {
-        currentHealth = MAXHEALTH;
         waypoints = waypointA;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -48,6 +45,8 @@ public class LaserEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         if (!isWaiting)
         {
             Patrol();

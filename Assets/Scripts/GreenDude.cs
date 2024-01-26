@@ -27,7 +27,7 @@ public class GreenDude : MonoBehaviour
     Transform waypoint;
     Rigidbody2D rb;
     EnemyHealth health;
-    new BoxCollider2D collider;
+    BoxCollider2D collider;
     int currentWaypoint;
     bool isGrounded;
     bool shouldJump;
@@ -48,6 +48,8 @@ public class GreenDude : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         TargetInDistance();
         if (followPlayer && followEnabled)
         {

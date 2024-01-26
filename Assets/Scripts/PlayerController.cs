@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -80,7 +79,14 @@ public class PlayerController : MonoBehaviour
     }
     private void OnPausePerformed(InputAction.CallbackContext context)
     {
-        
+        if (!UIManager.Instance.IsPaused())
+        {
+            UIManager.Instance.Pause();
+        }
+        else
+        {
+            UIManager.Instance.Resume();
+        }
     }
     public void PlayerDeath()
     {
@@ -90,6 +96,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         if (_canClimb)
         {
             rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime / 2, moveAxisY * _moveSpeed * Time.fixedDeltaTime / 2);
@@ -116,7 +124,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnInteractPerformed(InputAction.CallbackContext value)
     {
-        if (!IsGrounded() || !canFinish)
+        if (!IsGrounded() || !canFinish || UIManager.Instance.IsPaused())
         {
             return;
         }
@@ -129,6 +137,8 @@ public class PlayerController : MonoBehaviour
     }
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         moveAxisX = value.ReadValue<float>();
         if (moveAxisX < 0)
         {
@@ -150,6 +160,8 @@ public class PlayerController : MonoBehaviour
     }
     private void OnJumpPerformed(InputAction.CallbackContext value)
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         if (IsGrounded() && !_canClimb && !doubleJump)
         {
             rb.AddForce(Vector2.up * _jumpPower);
@@ -174,6 +186,8 @@ public class PlayerController : MonoBehaviour
     }
     private void OnClimbPerformed(InputAction.CallbackContext value)
     {
+        if (UIManager.Instance.IsPaused())
+            return;
         moveAxisY = value.ReadValue<float>();
         _anims.ClimbDirection(moveAxisY);
     }
@@ -184,7 +198,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnShootPerformed(InputAction.CallbackContext value)
     {
-        if (!IsGrounded())
+        if (!IsGrounded() || UIManager.Instance.IsPaused())
         {
             return;
         }
@@ -199,6 +213,8 @@ public class PlayerController : MonoBehaviour
     }
     public void SpawnProjectile()
     {
+        if(UIManager.Instance.IsPaused())
+            return;
         GameObject bullet = BulletPool.Instance.GetBullet();
         bullet.transform.parent = FindAnyObjectByType<BulletPool>().transform;
         bullet.transform.SetPositionAndRotation(_bulletSpawnLocation.position, Quaternion.identity);
