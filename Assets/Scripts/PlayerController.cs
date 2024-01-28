@@ -96,8 +96,6 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (UIManager.Instance.IsPaused())
-            return;
         if (_canClimb)
         {
             rb.velocity = new Vector2(moveAxisX * _moveSpeed * Time.fixedDeltaTime / 2, moveAxisY * _moveSpeed * Time.fixedDeltaTime / 2);

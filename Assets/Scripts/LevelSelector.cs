@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 public class LevelSelector : MonoBehaviour
 {
     [SerializeField] GameObject MainCam;
@@ -9,14 +10,24 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] float distance;
     [SerializeField] int orangeStart, greenStart;
 
+    PlayerControl playerControl;
+
     float dest;
     int currentScroll = 0;
     float scrollPos = 0;
     float[] pos;
 
     int progress;
+
+    private void Awake()
+    {
+        playerControl = new PlayerControl();
+    }
     private void OnEnable()
     {
+        playerControl.Enable();
+        playerControl.LevelSelector.Pan.performed += Pan_performed;
+        playerControl.LevelSelector.Enter.performed += Enter_performed;
         levelButtons = GetComponentsInChildren<Button>();
         progress = PlayerPrefs.GetInt("Level", 0);
         for(int i = 0; i < levelButtons.Length; i++)
@@ -30,14 +41,39 @@ public class LevelSelector : MonoBehaviour
                 levelButtons[i].interactable = false;
             }
         }
-    }
-    private void Update()
-    {
         pos = new float[transform.childCount];
         for (int i = 0; i < pos.Length; i++)
         {
             pos[i] = distance * i;
         }
+        currentScroll = progress; 
+        dest = pos[currentScroll];
+    }
+    private void OnDisable()
+    {
+        playerControl.Disable();
+        playerControl.LevelSelector.Pan.performed -= Pan_performed;
+        playerControl.LevelSelector.Enter.performed -= Enter_performed;
+    }
+    private void Pan_performed(InputAction.CallbackContext val)
+    {
+        if(val.ReadValue<float>() > 0.2f)
+        {
+            NextLevelScroll();
+        }
+        else if(val.ReadValue<float>() < -0.2f)
+        {
+            PrevLevelScroll();
+        }
+    }
+
+    private void Enter_performed(InputAction.CallbackContext val)
+    {
+        PlayLevel(currentScroll+1);
+    }
+
+    private void Update()
+    {
         for (int i = 0; i < pos.Length; i++)
         {
             if (scrollPos < pos[i] + (distance / 2) && scrollPos > pos[i] - (distance / 2))

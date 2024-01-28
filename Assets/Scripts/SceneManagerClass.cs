@@ -22,9 +22,6 @@ public class SceneManagerClass : MonoBehaviour
         _loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen");
         animator = GetComponent<Animator>();
     }
-    private void OnEnable()
-    {
-    }
     IEnumerator StartLoading(int lvl)
     {
         _loadingScreen.SetActive(true);

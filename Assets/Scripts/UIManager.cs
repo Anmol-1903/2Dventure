@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     {
         if (CanResume())
         {
-        Time.timeScale = 1f;
+            Time.timeScale = 1f;
             isPaused = false;
             pauseMenu.SetActive(false);
         }
@@ -59,6 +59,7 @@ public class UIManager : MonoBehaviour
     }
     public void Restart()
     {
+        Resume();
         SceneManagerClass.instance.LoadNewScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Mute()

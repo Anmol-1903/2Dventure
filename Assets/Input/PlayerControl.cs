@@ -469,6 +469,197 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LevelSelector"",
+            ""id"": ""817228d0-30db-4d55-828d-b5a21e5068d2"",
+            ""actions"": [
+                {
+                    ""name"": ""Pan"",
+                    ""type"": ""Button"",
+                    ""id"": ""0483ae5a-3f9d-4729-8b12-0778072fc053"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""5cda8fec-7772-41af-bd8c-0ba1a12c6a28"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5384a47a-dca5-46db-8c41-6306f4b564fc"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""42e9b834-7a98-463b-9b85-10ef13a0201d"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""24274b3e-6ca9-489b-b7c6-807c625cb40d"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1cd3bdfa-7787-4d04-8966-7324fd84dccc"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""dc062853-cca7-48ab-acbb-0133d662f6e9"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""eb9f7334-3324-40cb-be12-a9c5a3363ba2"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""6f3b7b8e-4a72-4d89-bfea-5839af46a822"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e4e2ec3e-eaca-49cc-80bb-6bd60412cff9"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""649d6edf-9301-41c7-b610-44924530fa2d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a5db595a-e72e-4897-8318-49f55b7bc46a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b7bd130b-3bf6-470d-9609-4cd7dab61529"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c016407f-8ba7-4033-8e44-b349c6c85c31"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64cbb878-0c48-4900-b140-a5836dd40923"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""232c0343-24c1-4d58-b812-00c8f956e709"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a21ca3ef-0ec3-4b99-acbb-9c36dfe8be8f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -481,6 +672,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        // LevelSelector
+        m_LevelSelector = asset.FindActionMap("LevelSelector", throwIfNotFound: true);
+        m_LevelSelector_Pan = m_LevelSelector.FindAction("Pan", throwIfNotFound: true);
+        m_LevelSelector_Enter = m_LevelSelector.FindAction("Enter", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -624,6 +819,60 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // LevelSelector
+    private readonly InputActionMap m_LevelSelector;
+    private List<ILevelSelectorActions> m_LevelSelectorActionsCallbackInterfaces = new List<ILevelSelectorActions>();
+    private readonly InputAction m_LevelSelector_Pan;
+    private readonly InputAction m_LevelSelector_Enter;
+    public struct LevelSelectorActions
+    {
+        private @PlayerControl m_Wrapper;
+        public LevelSelectorActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pan => m_Wrapper.m_LevelSelector_Pan;
+        public InputAction @Enter => m_Wrapper.m_LevelSelector_Enter;
+        public InputActionMap Get() { return m_Wrapper.m_LevelSelector; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LevelSelectorActions set) { return set.Get(); }
+        public void AddCallbacks(ILevelSelectorActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LevelSelectorActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LevelSelectorActionsCallbackInterfaces.Add(instance);
+            @Pan.started += instance.OnPan;
+            @Pan.performed += instance.OnPan;
+            @Pan.canceled += instance.OnPan;
+            @Enter.started += instance.OnEnter;
+            @Enter.performed += instance.OnEnter;
+            @Enter.canceled += instance.OnEnter;
+        }
+
+        private void UnregisterCallbacks(ILevelSelectorActions instance)
+        {
+            @Pan.started -= instance.OnPan;
+            @Pan.performed -= instance.OnPan;
+            @Pan.canceled -= instance.OnPan;
+            @Enter.started -= instance.OnEnter;
+            @Enter.performed -= instance.OnEnter;
+            @Enter.canceled -= instance.OnEnter;
+        }
+
+        public void RemoveCallbacks(ILevelSelectorActions instance)
+        {
+            if (m_Wrapper.m_LevelSelectorActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILevelSelectorActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LevelSelectorActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LevelSelectorActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LevelSelectorActions @LevelSelector => new LevelSelectorActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -632,5 +881,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface ILevelSelectorActions
+    {
+        void OnPan(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
     }
 }
