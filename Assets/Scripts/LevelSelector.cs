@@ -69,7 +69,10 @@ public class LevelSelector : MonoBehaviour
 
     private void Enter_performed(InputAction.CallbackContext val)
     {
-        PlayLevel(currentScroll+1);
+        if(currentScroll <= progress)
+        {
+            PlayLevel(currentScroll+1);
+        }
     }
 
     private void Update()

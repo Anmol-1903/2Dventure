@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] string[] tips, dialogues;
     [SerializeField] AudioClip[] clip;
     [SerializeField] AudioMixer audioMixer;
+    [SerializeField] Image muteSprite;
+    [SerializeField] Image unMuteSprite;
 
     private bool isPaused;
     private bool isMute;
@@ -28,6 +31,20 @@ public class UIManager : MonoBehaviour
         tipText = pauseMenu.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         dialogueText = pauseMenu.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         audioSource = pauseMenu.GetComponent<AudioSource>();
+
+        audioMixer.GetFloat("Volume", out float vol);
+        if (vol < 0)
+        {
+            isMute = true;
+            unMuteSprite.gameObject.SetActive(false);
+            muteSprite.gameObject.SetActive(true);
+        }
+        else
+        {
+            isMute = false;
+            unMuteSprite.gameObject.SetActive(true);
+            muteSprite.gameObject.SetActive(false);
+        }
     }
     public void Pause()
     {
@@ -59,23 +76,34 @@ public class UIManager : MonoBehaviour
     }
     public void Restart()
     {
-        Resume();
-        SceneManagerClass.instance.LoadNewScene(SceneManager.GetActiveScene().buildIndex);
+        if (CanResume())
+        {
+            Resume();
+            SceneManagerClass.instance.LoadNewScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
     public void Mute()
     {
         if(isMute)
         {
             audioMixer.SetFloat("Volume", 0);
+            unMuteSprite.gameObject.SetActive(true);
+            muteSprite.gameObject.SetActive(false);
         }
         else
         {
             audioMixer.SetFloat("Volume", -80);
+            unMuteSprite.gameObject.SetActive(false);
+            muteSprite.gameObject.SetActive(true);
         }
         isMute = !isMute;
     }
     public void MainMenu()
     {
-        SceneManagerClass.instance.LoadNewScene(0);
+        if (CanResume())
+        {
+            Resume();
+            SceneManagerClass.instance.LoadNewScene(0);
+        }
     }
 }
